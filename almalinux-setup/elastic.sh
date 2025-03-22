@@ -1,6 +1,6 @@
 
 # Configuration
-TARGET_USER=$(logname) # Gets the user who initiated the script, not root
+TARGET_USER=$(logname)
 ELASTIC_SERVER="http://inf-10037.phxaz.infinatio.us:8220"
 ENROLLMENT_TOKEN=""
 

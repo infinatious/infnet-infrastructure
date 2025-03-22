@@ -1,6 +1,7 @@
+# This version of the script is for existing systems.
 
 # Configuration
-TARGET_USER=$(logname) # Gets the user who initiated the script, not root
+TARGET_USER=$(logname)
 SSH_PUBLIC_KEY=""
 SSH_DIR="/home/$TARGET_USER/.ssh"
 AUTHORIZED_KEYS="$SSH_DIR/authorized_keys"
@@ -66,38 +67,4 @@ else
     echo "Custom PS1 prompt already set in $BASHRC."
 fi
 
-#Timezone
-timedatectl set-timezone "America/Phoenix"
-
-# System Updates and Tools
-echo "fastestmirror=true" >> /etc/dnf/dnf.conf
-echo "max_parallel_downloads=10" >> /etc/dnf/dnf.conf
-echo "defaultyes=True" >> /etc/dnf/dnf.conf
-dnf update -y
-dnf install epel-release -y
-dnf install open-vm-tools -y
-dnf install nfs-utils -y
-dnf install htop -y
-dnf install vim-enhanced -y
-dnf install git -y
-dnf install wget -y
-dnf install make -y
-dnf install gcc -y
-dnf install links -y
-dnf install mlocate -y
-dnf install cockpit -y
-systemctl enable --now cockpit.socket
-dnf install cockpit-storaged -y
-dnf install cockpit-navigator -y
-dnf install xe-guest-utilities-latest -y
-systemctl enable xe-linux-distribution --now
-
-#Wazuh
-curl -o wazuh-agent-4.10.1-1.aarch64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.10.1-1.aarch64.rpm && sudo WAZUH_MANAGER='inf-10045.phxaz.infinatio.us' rpm -ihv wazuh-agent-4.10.1-1.aarch64.rpm
-sudo systemctl daemon-reload
-sudo systemctl enable wazuh-agent
-sudo systemctl start wazuh-agent
-
-
-echo "Setup complete!"
 
